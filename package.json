@@ -54,6 +54,10 @@
   "scripts": {
     "build": "rollup -c",
     "dev:rollup": "rollup -c -w",
+    "dockerall": "yarn dockerbuild && yarn dockerstop && yarn dockerrun",
+    "dockerstop": "docker stop crypto && docker rm crypto",
+    "dockerbuild": "docker build --tag cryptoduel .",
+    "dockerrun": "docker run -d -p 5000:5000 --name crypto cryptoduel",
     "dev:livereload": "rollup -c -w --environment LIVERELOAD",
     "dev:lan": "npm run dev:livereload & npm run start -- --dev --host 0.0.0.0",
     "dev:nollup": "nollup -c --hot --port 5000 --content-base ./public",
@@ -62,7 +66,7 @@
     "test:watch": "jest src --watch",
     "type:check": "svelte-check --tsconfig tsconfig.json",
     "type:check:watch": "svelte-check --watch --tsconfig tsconfig.json",
-    "start": "sirv public",
+    "start": "sirv public --host",
     "format": "eslint --cache --fix src"
   }
 }
