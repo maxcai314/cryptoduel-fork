@@ -91,4 +91,10 @@ export const congratulationTitles = [
   'ok but where are your friends?',
   'get a social life',
   'get a life bozo',
+  'ur cracked',
+  'cracked for real',
+  "bro's cracked",
+  'too good',
+  'skill issue',
+  'skilled',
 ];
