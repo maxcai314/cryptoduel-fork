@@ -12,7 +12,7 @@ export const getQuoteGenerator = () => {
 
   const chunk = fetch(
     // `./quotes/${Math.floor(Math.random() * (amountChunks))}.json`
-    `./quotes/funny.json`
+    `./quotes/funny.json` // chose custom quotes only
   )
     .then((r) => r.json())
     .then(shuffleArray);
