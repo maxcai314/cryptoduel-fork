@@ -11,7 +11,7 @@ export const getQuoteGenerator = () => {
   // const index = Math.floor(Math.random() * 2); // first 2 chunks only
   // // const index = Math.floor(Math.random() * (amountChunks)); // all chunks
 
-  const generateRandomPath = () => `./quotes/${Math.floor(Math.random() * 2)}.json`;
+  const generateRandomPath = () => './quotes/' + Math.floor(Math.random() * 2) + '.json';
   // const generateRandomPath = () => `./quotes/${Math.floor(Math.random() * amountChunks)}.json`;
 
   const chunk = fetch(
