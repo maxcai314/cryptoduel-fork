@@ -8,9 +8,11 @@ export { alphabet } from './constants.js';
 }} EncryptedQuote */
 
 export const getQuoteGenerator = () => {
+  const index = Math.floor(Math.random() * 2); // first 2 chunks only
+  // const index = Math.floor(Math.random() * (amountChunks)); // all chunks
+
   const chunk = fetch(
-     `./quotes/${Math.floor(Math.random() * 2)}.json` // first 2 chunks only
-     // `./quotes/${Math.floor(Math.random() * (amountChunks))}.json`
+     `./quotes/${index}.json`
      //`./quotes/funny.json` // chose custom quotes only
   )
     .then((r) => r.json());
