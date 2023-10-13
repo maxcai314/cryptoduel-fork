@@ -8,9 +8,14 @@ export { alphabet } from './constants.js';
 }} EncryptedQuote */
 
 export const getQuoteGenerator = () => {
+  // const index = Math.floor(Math.random() * 2); // first 2 chunks only
+  // // const index = Math.floor(Math.random() * (amountChunks)); // all chunks
+
+  const generateRandomPath = () => `./quotes/${Math.floor(Math.random() * 2)}.json`;
+  // const generateRandomPath = () => `./quotes/${Math.floor(Math.random() * amountChunks)}.json`;
+
   const chunk = fetch(
-      `./quotes/${Math.floor(Math.random() * 2)}.json?${Math.random()}` // first 2 chunks
-      // `./quotes/${Math.floor(Math.random() * (amountChunks))}.json?${Math.random()}` // all chunks
+      generateRandomPath() // chose random chunk
       // './quotes/funny.json' // chose custom quotes only
   )
     .then((r) => r.json());
