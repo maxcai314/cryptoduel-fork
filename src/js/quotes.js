@@ -9,7 +9,7 @@ export { alphabet } from './constants.js';
 
 export const getQuoteGenerator = () => {
   const chunk = fetch(
-     `./quotes/${Math.floor(Math.random() * 3)}.json` // first 3 chunks only
+     `./quotes/${Math.floor(Math.random() * 2)}.json` // first 2 chunks only
      // `./quotes/${Math.floor(Math.random() * (amountChunks))}.json`
      //`./quotes/funny.json` // chose custom quotes only
   )
