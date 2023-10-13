@@ -15,10 +15,12 @@ export const getQuoteGenerator = () => {
       // Add more paths as needed
     ];
 
-    const randomPath = shuffleArray(paths)[Math.floor(Math.random() * paths.length)];
+    const fetchPromises = paths.map((path) => fetch(path).then((r) => r.json()));
 
-    const chunk = await fetch(randomPath, {cache: "reload"}).then((r) => r.json());
-    const quote = shuffleArray(chunk)[Math.floor(Math.random() * chunk.length)];
+    const randomIndex = Math.floor(Math.random() * fetchPromises.length);
+    const randomJSON = await fetchPromises[randomIndex];
+
+    const quote = shuffleArray(randomJSON)[Math.floor(Math.random() * randomJSON.length)];
     return {author: quote.quoteAuthor, text: cleanUpText(quote.quoteText)};
   };
 };
