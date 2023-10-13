@@ -8,21 +8,18 @@ export { alphabet } from './constants.js';
 }} EncryptedQuote */
 
 export const getQuoteGenerator = () => {
-  let quoteIndex = 0;
-
   const chunk = fetch(
      `./quotes/${Math.floor(Math.random() * 2)}.json` // first 2 chunks only
      // `./quotes/${Math.floor(Math.random() * (amountChunks))}.json`
      //`./quotes/funny.json` // chose custom quotes only
   )
-    .then((r) => r.json())
-    .then(shuffleArray);
+    .then((r) => r.json());
 
   const newQuote = async () => {
     const quotes = /** @type {{ quoteAuthor: string, quoteText: string }[]} */ (
       await chunk
     );
-    const quote = quotes[quoteIndex++ % quotes.length];
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
     return { author: quote.quoteAuthor, text: cleanUpText(quote.quoteText) };
   };
 
