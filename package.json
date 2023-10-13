@@ -54,7 +54,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev:rollup": "rollup -c -w",
-    "dockerall": "yarn dockerstop && yarn dockerbuild && yarn dockerrun",
+    "dockerall": "sudo yarn dockerstop && echo 'stopped docker' && sudo yarn dockerbuild && echo 'built docker' && sudo yarn dockerrun && echo 'ran docker'",
     "dockerstop": "docker stop crypto && docker rm crypto",
     "dockerbuild": "docker build --tag cryptoduel .",
     "dockerrun": "docker run -d -p 5000:5000 --name crypto cryptoduel",
