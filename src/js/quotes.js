@@ -17,7 +17,7 @@ export const getQuoteGenerator = () => {
 
     const randomPath = shuffleArray(paths)[Math.floor(Math.random() * paths.length)];
 
-    const chunk = await fetch(randomPath).then((r) => r.json());
+    const chunk = await fetch(randomPath, {cache: "reload"}).then((r) => r.json());
     const quote = shuffleArray(chunk)[Math.floor(Math.random() * chunk.length)];
     return {author: quote.quoteAuthor, text: cleanUpText(quote.quoteText)};
   };
