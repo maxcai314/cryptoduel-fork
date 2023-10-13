@@ -1,5 +1,5 @@
-import { amountChunks } from './meta.js';
-import { alphabet } from './constants.js';
+import {alphabet} from './constants.js';
+
 export { alphabet } from './constants.js';
 
 /** @typedef {{ author: string, text: string }} Quote */
@@ -8,15 +8,20 @@ export { alphabet } from './constants.js';
 }} EncryptedQuote */
 
 export const getQuoteGenerator = () => {
-  const newQuote = async () => {
-    const index = Math.floor(Math.random() * 2); // Generate a random index
-    const response = await fetch(`./quotes/${index}.json`);
-    const quotes = await response.json();
-    const quote = shuffleArray(quotes)[Math.floor(Math.random() * quotes.length)];
-    return { author: quote.quoteAuthor, text: cleanUpText(quote.quoteText) };
-  };
+  return async () => {
+    const paths = [
+      './quotes/0.json',
+      './quotes/1.json',
+      './quotes/2.json',
+      // Add more paths as needed
+    ];
 
-  return newQuote;
+    const randomPath = shuffleArray(paths)[Math.floor(Math.random() * paths.length)];
+
+    const chunk = await fetch(randomPath).then((r) => r.json());
+    const quote = shuffleArray(chunk)[Math.floor(Math.random() * chunk.length)];
+    return {author: quote.quoteAuthor, text: cleanUpText(quote.quoteText)};
+  };
 };
 
 /**
