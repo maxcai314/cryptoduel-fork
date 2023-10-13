@@ -12,7 +12,7 @@ export const getQuoteGenerator = () => {
     const index = Math.floor(Math.random() * 2); // Generate a random index
     const response = await fetch(`./quotes/${index}.json`);
     const quotes = await response.json();
-    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+    const quote = shuffleArray(quotes)[Math.floor(Math.random() * quotes.length)];
     return { author: quote.quoteAuthor, text: cleanUpText(quote.quoteText) };
   };
 
