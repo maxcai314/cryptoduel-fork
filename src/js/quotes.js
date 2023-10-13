@@ -10,9 +10,8 @@ export { alphabet } from './constants.js';
 export const getQuoteGenerator = () => {
   return async () => {
     const paths = [
-      './quotes/0.json',
-      './quotes/1.json',
-      './quotes/2.json',
+      './quotes/all.json',
+      './quotes/funny.json',
       // Add more paths as needed
     ];
 
