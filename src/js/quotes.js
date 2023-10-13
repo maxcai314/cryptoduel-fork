@@ -9,24 +9,9 @@ export { alphabet } from './constants.js';
 
 export const getQuoteGenerator = () => {
   return async () => {
-    const paths = [
-      './quotes/all.json',
-      './quotes/funny.json',
-      './quotes/funny.json',
-      './quotes/funny.json',
-      './quotes/funny.json',
-      './quotes/funny.json',
-      './quotes/funny.json',
-      './quotes/funny.json',
-      // Add more paths as needed
-    ];
+    const quotes = await fetch("./quotes/funny.json").then((res) => res.json());
 
-    const fetchPromises = paths.map((path) => fetch(path).then((r) => r.json()));
-
-    const combinedJSONs = await Promise.all(fetchPromises);
-    const combinedData = combinedJSONs.flat();
-
-    const quote = shuffleArray(combinedData)[Math.floor(Math.random() * combinedData.length)];
+    const quote = shuffleArray(quotes)[Math.floor(Math.random() * quotes.length)];
     return {author: quote.quoteAuthor, text: cleanUpText(quote.quoteText)};
   };
 };
