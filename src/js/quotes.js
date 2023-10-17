@@ -9,9 +9,9 @@ export { alphabet } from './constants.js';
 
 export const getQuoteGenerator = () => {
   return async () => {
-    const quotes = await fetch("./quotes/funny.json").then((res) => res.json());
+    const quotes = await fetch("./quotes/funny.json").then((res) => res.json()).then(shuffleArray);
 
-    const quote = shuffleArray(quotes)[Math.floor(Math.random() * quotes.length)];
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
     return {author: quote.quoteAuthor, text: cleanUpText(quote.quoteText)};
   };
 };
