@@ -70,11 +70,11 @@
   }
 
   .progress-item.whitespace {
-    background-color: lightgrey;
+    background-color: #d1d5db;
   }
 
   .progress-item.misc {
-    background-color: darkgrey;
+    background-color: #9ca3af;
   }
 
   .opponent-progress::before,
