@@ -4,12 +4,17 @@
 
 import { choose, fmtTime } from './utils.js';
 import { congratulationTitles, isHivemindBrain } from './constants.js';
+import { alphabet } from '@/js/quotes.js';
 
 /** @typedef {import('./quotes.js').EncryptedQuote} EncryptedQuote */
 
-/** @type {(gp: EncryptedQuote | null) => boolean[]} */
+/** @type {(gp: EncryptedQuote | null) => number[]} */
 export const getEmptyProgress = (gp) =>
-  gp === null ? [] : [...gp.ciphertext].map((_) => false);
+  gp === null ? [] : [...gp.ciphertext].map((ch) => {
+    if (ch == ' ') return -1;
+    else if (!alphabet.includes(ch)) return -2;
+    else return 0;
+  });
 
 /** @type {(timeTaken: number) => string} */
 export const getCongratulationsMessage = (timeTaken) => {

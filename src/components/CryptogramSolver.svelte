@@ -33,10 +33,14 @@
     );
   };
 
-  /** @type {(replacement: string[], ciphertext: string) => boolean[]} */
+  /** @type {(replacement: string[], ciphertext: string) => number[]} */
   const getProgress = (replacement, ciphertext) =>
     [...ciphertext].map(
-      (ch) => alphabet.includes(ch) && replacement[alphabet.indexOf(ch)] !== ''
+      (ch) => {
+        if (ch == ' ') return -1;
+        else if (!alphabet.includes(ch)) return -2;
+        else return replacement[alphabet.indexOf(ch)] !== '' ? 1 : 0;
+      }
     );
 
   /** @type {(e: CustomEvent<any>) => void} */

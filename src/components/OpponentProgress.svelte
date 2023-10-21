@@ -24,10 +24,12 @@
         $timeTakenByOpponents.get(user.id) ?? 0
       )})';"
     >
-      <UserBubble name={user.name} />
+      <div style="display: flex; justify-content: start">
+        <UserBubble name={user.name} />
+      </div>
       <div class="opponent-progress">
-        {#each user.progress ?? emptyProgress as hasFilled}
-          <div class="progress-item" class:has-done={hasFilled} />
+        {#each user.progress ?? emptyProgress as progNum}
+          <div class="progress-item" class:has-done={progNum == 1} class:whitespace={progNum == -1} class:misc={progNum == -2} />
         {/each}
       </div>
     </div>
@@ -65,6 +67,14 @@
 
   .progress-item.has-done {
     background-color: var(--primary-color);
+  }
+
+  .progress-item.whitespace {
+    background-color: lightgrey;
+  }
+
+  .progress-item.misc {
+    background-color: darkgrey;
   }
 
   .opponent-progress::before,

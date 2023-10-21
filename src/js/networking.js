@@ -26,7 +26,7 @@ export const peer = new external.Peer();
  * @typedef {import('peerjs').DataConnection} Connection
  * @typedef {{ type: 0, name: string }} INIT_MSG
  * @typedef {{ type: 1, problem: import('./quotes.js').EncryptedQuote }} NEW_PROB_MSG
- * @typedef {{ type: 2, progress: null | boolean[], solved: boolean, name: string }}
+ * @typedef {{ type: 2, progress: null | number[], solved: boolean, name: string }}
  * UPDATE_S_MSG
  * @typedef {{ type: 3, users: User[] }} UPDATE_C_MSG
  * @typedef {INIT_MSG | NEW_PROB_MSG | UPDATE_S_MSG | UPDATE_C_MSG} PeerData

@@ -9,7 +9,7 @@ const defaultUsers = [
   {
     id: '',
     name: '',
-    progress: [null, [true]][0],
+    progress: [null, [0]][0],
     solved: false,
   },
 ].slice(1);
