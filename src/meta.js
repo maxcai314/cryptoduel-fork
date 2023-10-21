@@ -1,3 +1,3 @@
-export const amountQuotes = 5491;
+export const amountQuotes = 5493;
 export const amountChunks = 12;
 
