@@ -97,4 +97,6 @@ export const congratulationTitles = [
   'too good',
   'skill issue',
   'skilled',
+  'bro is magnus carlsen',
+  'getting there',
 ];
