@@ -25,9 +25,10 @@ export const gameProblem = writable(
 );
 export const name = lswritable(
   'name',
-  `person-${Math.floor(Math.random() * 10000)}`
+  `codebuster-${Math.floor(Math.random() * 10000)}`
 );
 export const patristocratEnabled = lswritable('patristocrat', false);
+export const autofillEnabled = lswritable('autofill', true);
 export const hintEnabled = lswritable('hint', false);
 export const hivemindConnection = writable(
   /** @type {Connection | null} */ (null)

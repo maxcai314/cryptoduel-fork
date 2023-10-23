@@ -17,6 +17,7 @@
   import {
     hintEnabled,
     patristocratEnabled,
+    autofillEnabled,
     progress,
     gameProblem,
     solved,
@@ -59,6 +60,12 @@
           id="hint-option"
           label="Hint"
           bind:checked={$hintEnabled}
+          disabled={$gameProblem !== null}
+        />
+        <Checkbox
+          id="autofill-option"
+          label="Autofill"
+          bind:checked={$autofillEnabled}
           disabled={$gameProblem !== null}
         />
       </div>
