@@ -8,7 +8,9 @@
   import { getCounts } from '@/js/utils.js';
   import ReplacementCharacter from './ReplacementCharacter.svelte';
 
-  export let replacement = Array(26).fill(' ');
+  /** @type string */
+  export let replacement = '';
+  /** @type string */
   export let quote = '';
   export let disabled = false;
 

@@ -4,19 +4,19 @@
 
   import ReplacementCharacter from './ReplacementCharacter.svelte';
 
-  export let word = '';
-  export let replacement = Array(26).fill('');
+  export let word = ''; // the unencrypted word
+  export let replacement = ''; // stores the actual sentence instead of replacement alphabet
+
   export let disabled = false;
 
-  /** @type {(word: string, replacement: string[]) => Array<string | null>} */
-  const replaceChars = (word, replacement) =>
-    [...word].map((ch) => {
-      const alphabetIdx = alphabet.indexOf(ch);
-      if (alphabetIdx === -1) return null;
-      return replacement[alphabetIdx];
-    });
+  /** @type {(word: string, replacement: string) => Array<string | null>} */
+  const replaceChars = (word, replacement) => 
+    [...word].map((ch, index) => {
+      if (!alphabet.includes(ch)) return null;
+      if (replacement[index] === '\u200B') return '';
+      return replacement[index];
+    }); // null if char is not alphabetic, '' if no replacement, char if replacement
 
-  // null if char is not alphabetic, '' if no replacement, char if replacement
   $: replacedChars = replaceChars(word, replacement);
   $: duplicateReplacements = getDuplicates(replacement);
 </script>

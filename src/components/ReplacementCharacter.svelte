@@ -48,9 +48,11 @@
         return;
       }
 
+      let index = 0; // todo: acutally figure this out
       dispatch('replace', {
         from: ogchar,
         to: char,
+        index: index,
       });
     })
   );

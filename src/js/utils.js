@@ -23,20 +23,20 @@ export const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
 /**
  * @template T
- * @param {Array<T>} arr
+ * @param {string} str
  * @returns {Set<T>}
  */
-export const getDuplicates = (arr) => {
+export const getDuplicates = (str) => {
   const duplicates = new Set();
   /** @type {typeof duplicates} */
   const visited = new Set();
 
-  for (const entry of arr) {
+  str.split('').forEach((entry) => {
     if (visited.has(entry)) {
       duplicates.add(entry);
     }
     visited.add(entry);
-  }
+  });
 
   return duplicates;
 };
