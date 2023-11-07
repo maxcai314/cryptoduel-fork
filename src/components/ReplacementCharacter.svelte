@@ -1,12 +1,12 @@
 <script context="module">
   /** @type {Set<string>} */
-  const focussedKeys = new Set();
+  const focusedKeys = new Set();
 </script>
 
 <script>
   import { subscribeToKeyboard } from '@/js/actions.js';
   import { isAndroid, Errors } from '@/js/constants.js';
-  import { focussedKey, needsKeyboardEntry } from '@/js/store.js';
+  import { focusedKey as focusedKey, needsKeyboardEntry } from '@/js/store.js';
   import { replaceableElement } from '@/js/use.js';
   import { createEventDispatcher, onMount } from 'svelte';
 
@@ -16,7 +16,7 @@
   export let disableUnderline = false;
   export let tag = 'div';
 
-  let focussed = false;
+  let focused = false;
 
   $: replacement_ = replacement;
   $: if (replacement_ !== replacement) {
@@ -24,22 +24,22 @@
   }
 
   const handleFocus = () => {
-    focussedKeys.add(ogchar);
-    focussedKey.set(ogchar);
-    focussed = true;
+    focusedKeys.add(ogchar);
+    focusedKey.set(ogchar);
+    focused = true;
   };
 
   const handleBlur = () => {
-    focussedKeys.delete(ogchar);
-    focussedKey.set(focussedKeys.size === 1 ? [...focussedKeys][0] : null);
-    focussed = false;
+    focusedKeys.delete(ogchar);
+    focusedKey.set(focusedKeys.size === 1 ? [...focusedKeys][0] : null);
+    focused = false;
   };
 
   const dispatch = createEventDispatcher();
 
   onMount(() =>
     subscribeToKeyboard((char) => {
-      if (!focussed) return;
+      if (!focused) return;
       if (ogchar === char && ogchar !== '') {
         dispatch('error', {
           id: Errors.NO_SELF_DECODE,
@@ -57,16 +57,16 @@
     })
   );
 
-  $: if (focussed && disabled) focussed = false;
-  $: if (focussed && isAndroid) needsKeyboardEntry.set(true);
-  $: if (!focussed && isAndroid) needsKeyboardEntry.set(false);
+  $: if (focused && disabled) focused = false;
+  $: if (focused && isAndroid) needsKeyboardEntry.set(true);
+  $: if (!focused && isAndroid) needsKeyboardEntry.set(false);
 </script>
 
 <svelte:element
   this={tag}
   class="decrypted-letter"
   class:empty={replacement === ''}
-  class:focussed-char={$focussedKey === ogchar}
+  class:focused-char={$focusedKey === ogchar}
   class:non-alphabetic={replacement === null}
   class:enable-underline={!disableUnderline}
   class:disabled
@@ -124,9 +124,9 @@
     font-family: monospace;
   }
 
-  :not(.disabled).focussed-char .decrypted-letter-input {
+  :not(.disabled).focused-char .decrypted-letter-input {
     cursor: pointer;
-    background-color: var(--focussed-char-color);
+    background-color: var(--focused-char-color);
   }
 
   :not(.disabled) .decrypted-letter-input:hover {
@@ -154,7 +154,7 @@
   }
 
   .enable-underline.empty:focus-within,
-  .enable-underline.focussed-char {
+  .enable-underline.focused-char {
     --underline-color: white;
   }
 

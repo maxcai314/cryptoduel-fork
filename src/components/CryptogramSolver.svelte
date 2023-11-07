@@ -14,8 +14,11 @@
 
   const dispatch = createEventDispatcher();
 
-  /** @type {string | null}*/
+  /** @type {string | null} */
   let replacement = null; // stores the actual sentence instead of replacement alphabet
+
+  /** @type {string} */
+  let replacementValue;
 
   /** @type {(replacement: { from: string, to: string, index: number }) => void} */
   const replace = ({ from, to, index }) => {
@@ -42,13 +45,13 @@
   const getProgress = (replacement, ciphertext) => {
       const result = [...ciphertext].map((ch) => { // space: -1, alphabet: 1, '\u200B': 0, non-alphabet: -2
           if (ch == ' ') return -1;
-          else if (alphabet.includes(ch)) return 1;
           else if (ch == '\u200B') return 0;
+          else if (alphabet.includes(ch)) return 1;
           else return [-2][0]; // returns -2, but makes typescript happy
       });
 
       return result;
-  }
+  } // todo: broken: for some reason displays blue for unanswered characters
 
   /** @type {(e: CustomEvent<any>) => void} */
   const handleReplace = (e) => replace(e.detail);
@@ -60,6 +63,14 @@
           alphabet.includes(ch) ? '\u200B' : ch
       );
       return result.join('');
+  }
+
+  $: {
+    if (autofillEnabled) {
+      replacementValue = alphabet;
+    } else {
+      replacementValue = Array(26).fill('\u200B').join('');
+    }
   }
 
   $: problem, (replacement = emptyReplacement(problem?.ciphertext) ?? '');
@@ -85,7 +96,7 @@
     {#each words as word, index}
       <Word
         word={word}
-        replacement={userwords[index]}
+        replacement={userwords[index] ?? ''}
         disabled={solved}
         on:replace={handleReplace}
         on:error
@@ -93,9 +104,9 @@
     {/each}
   </div>
   <ReplacementTable
-    replacement = {replacement ?? ''}
+    replacement={replacementValue}
     quote={problem.ciphertext}
-    disabled={solved}
+    disabled={solved || !autofillEnabled}
     on:replace={handleReplace}
     on:error
   />

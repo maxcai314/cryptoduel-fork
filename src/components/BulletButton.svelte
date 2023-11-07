@@ -8,12 +8,12 @@
 
   const handleHasExtended = writable(false);
 
-  let focussedOnButton = false;
+  let focusedOnButton = false;
   let extendHandleId = -1;
 
   const gotoGame = () => {
     startingExit = true;
-    if (!focussedOnButton) {
+    if (!focusedOnButton) {
       extendHandle(true);
     }
 
@@ -29,11 +29,11 @@
     clearTimeout(extendHandleId);
     handleHasExtended.set(false);
     extendHandleId = setTimeout(() => {
-      handleHasExtended.set(focussedOnButton || override);
+      handleHasExtended.set(focusedOnButton || override);
     }, handleExtensionWait);
   };
 
-  $: if (focussedOnButton) {
+  $: if (focusedOnButton) {
     extendHandle();
   }
 </script>
@@ -45,8 +45,8 @@
   class:starting-exit={startingExit}
   on:click={gotoGame}
   on:touchstart={gotoGame}
-  on:focus={() => (focussedOnButton = true)}
-  on:blur={() => (focussedOnButton = false)}
+  on:focus={() => (focusedOnButton = true)}
+  on:blur={() => (focusedOnButton = false)}
 >
   <slot>Play</slot>
 </button>
